@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android           = "http://schemas.android.com/apk/res/android"
+    xmlns:tools             = "http://schemas.android.com/tools"
+
+    android:orientation     = "vertical"
+    android:id              = "@+id/activity_main"
+    android:layout_width    = "match_parent"
+    android:layout_height   = "match_parent"
+
+    tools:context           = "uk.ac.napier.newchrono.MainActivity">
+
+    <!-- _______________________________________________________________________________________ -->
+    <!-- _____________________________________________________________________ START TOP LAYER _ -->
+    <!-- _______________________________________________________________________________________ -->
+    <LinearLayout
+        android:orientation     = "horizontal"
+        android:layout_width    = "match_parent"
+        android:layout_height   = "match_parent"
+        android:layout_weight   = "2"
+        android:background      = "#000000" >
+        <!-- ________________________________________________________________[TextView] GoalTime -->
+        <TextView
+            android:id              = "@+id/GoalTime"
+            android:text            = "@string/GoalTime"
+            android:textSize        = "40dp"
+            android:textColor       = "#468416"
+            android:layout_width    = "match_parent"
+            android:layout_height   = "match_parent"
+            android:layout_weight   = "1"
+            android:gravity         = "center" />
+
+    </LinearLayout>
+    <!-- _______________________________________________________________________________________ -->
+    <!-- _______________________________________________________________________ END TOP LAYER _ -->
+    <!-- _______________________________________________________________________________________ -->
+
+
+    <!-- _______________________________________________________________________________________ -->
+    <!-- __________________________________________________________________ START MIDDLE LAYER _ -->
+    <!-- _______________________________________________________________________________________ -->
+    <LinearLayout
+        android:orientation     = "vertical"
+        android:layout_width    = "match_parent"
+        android:layout_height   = "match_parent"
+        android:layout_weight   = "1"
+        android:weightSum       = "1"
+        android:background      = "#000000" >
+        <!-- _____________________________________________________________[TextView] Chronometer -->
+        <TextView
+            android:id              = "@+id/Chronometer"
+            android:text            = "@string/Chronometer"
+            android:gravity         = "center"
+            android:layout_width    = "match_parent"
+            android:layout_height   = "match_parent"
+            android:textSize        = "70dp"
+            android:textColor       = "#468416" />
+        <!-- __________________________________________________________[TextView] TimeDifference -->
+        <TextView
+            android:id              = "@+id/TimeDifference"
+            android:text            = "@string/TimeDifference"
+            android:textColor       = "#d2110e"
+            android:layout_width    = "match_parent"
+            android:layout_height   = "wrap_content"
+            android:layout_weight   = "0.1"
+            android:layout_marginTop= "116dp"
+            android:gravity         = "center"
+            android:textSize        = "70dp" />
+        <!-- ___________________________________________________________[TextView] DisplayResult -->
+        <TextView
+            android:id              = "@+id/DisplayResult"
+            android:text            = "0:00:000"
+            android:textSize        = "40dp"
+            android:textColor       = "#468416"
+            android:layout_width    = "match_parent"
+            android:layout_height   = "wrap_content"
+            android:layout_below    = "@+id/TimeDifference"
+            android:gravity         = "center" />
+
+    </LinearLayout>
+    <!-- _______________________________________________________________________________________ -->
+    <!-- ____________________________________________________________________ END MIDDLE LAYER _ -->
+    <!-- _______________________________________________________________________________________ -->
+
+
+    <!-- _______________________________________________________________________________________ -->
+    <!-- __________________________________________________________________ START BOTTOM LAYER _ -->
+    <!-- _______________________________________________________________________________________ -->
+    <LinearLayout
+        android:orientation     = "horizontal"
+        android:layout_width    = "match_parent"
+        android:layout_height   = "match_parent"
+        android:layout_weight   = "2" >
+        <!-- _______________________________________________________________[Button] StartButton -->
+        <Button
+            android:id              = "@+id/StartButton"
+            android:text            = "@string/start"
+            android:layout_width    = "match_parent"
+            android:layout_height   = "match_parent" />
+        <!-- ________________________________________________________________[Button] StopButton -->
+        <Button
+            android:id              = "@+id/StopButton"
+            android:text            = "@string/stop"
+            android:layout_width    = "match_parent"
+            android:layout_height   = "match_parent" />
+    </LinearLayout>
+    <!-- _______________________________________________________________________________________ -->
+    <!-- ____________________________________________________________________ END BOTTOM LAYER _ -->
+    <!-- _______________________________________________________________________________________ -->
+</LinearLayout>
