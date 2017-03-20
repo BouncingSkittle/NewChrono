@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
                         {
                             maChronometer.setVisibility(View.INVISIBLE);
                         }
-                    },1000);
+                    },500);
 
                     if(millisecond <= 9 && second <= 9)
                     {
@@ -330,6 +330,7 @@ public class MainActivity extends AppCompatActivity
                         intMaTimeDifference = 0;
 
                         maTimeDifference.setText("0:00:00");
+                        maDisplayResult.setText("WINNER");
                     }
 
 

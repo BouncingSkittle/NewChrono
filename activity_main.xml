@@ -56,26 +56,26 @@
             android:layout_height   = "match_parent"
             android:textSize        = "70dp"
             android:textColor       = "#468416" />
-        <!-- __________________________________________________________[TextView] TimeDifference -->
+        <!-- ___________________________________________________________[TextView] DisplayResult -->
         <TextView
-            android:id              = "@+id/TimeDifference"
-            android:text            = "@string/TimeDifference"
-            android:textColor       = "#d2110e"
+            android:id 		= "@+id/DisplayResult"
+            android:text            = "0:00:000"
+            android:textColor       = "#468416"
             android:layout_width    = "match_parent"
             android:layout_height   = "wrap_content"
             android:layout_weight   = "0.1"
             android:layout_marginTop= "116dp"
             android:gravity         = "center"
             android:textSize        = "70dp" />
-        <!-- ___________________________________________________________[TextView] DisplayResult -->
+        <!-- ___________________________________________________________[TextView] TimeDifference -->
         <TextView
-            android:id              = "@+id/DisplayResult"
-            android:text            = "0:00:000"
+            android:id              = "@+id/TimeDifference"
+            android:text            = "@string/TimeDifference"
             android:textSize        = "40dp"
-            android:textColor       = "#468416"
+            android:textColor       = "#d2110e"
             android:layout_width    = "match_parent"
             android:layout_height   = "wrap_content"
-            android:layout_below    = "@+id/TimeDifference"
+            android:layout_below    = "@+id/DisplayResult"
             android:gravity         = "center" />
 
     </LinearLayout>
