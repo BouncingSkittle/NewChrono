@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity
     private TextView maGoalTime;
     private TextView maTimeDifference;
     private TextView maChronometer;
+    private TextView maDisplayResult;
     private Button maStartButton;
     private Button maStopButton;
 
@@ -33,7 +34,29 @@ public class MainActivity extends AppCompatActivity
     String stringMaTimeDifference;
     String sub1MaTimeDifference;
     String sub2MaTimeDifference;
+
     int intMaTimeDifference;
+
+
+
+
+
+
+
+    int intMaDisplayResult; //5500
+
+    String stringMaDisplayResult; //5500 string
+
+    String sub1MaDisplayResult; // 5
+    String sub2MaDisplayResult; // 000
+
+
+
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +67,7 @@ public class MainActivity extends AppCompatActivity
         maGoalTime          = (TextView) findViewById(R.id.GoalTime);
         maTimeDifference    = (TextView) findViewById(R.id.TimeDifference);
         maChronometer       = (TextView) findViewById(R.id.Chronometer);
+        maDisplayResult     = (TextView) findViewById(R.id.DisplayResult);
 
         maStartButton       = (Button) findViewById(R.id.StartButton);
         maStopButton        = (Button) findViewById(R.id.StopButton);
@@ -72,6 +96,9 @@ public class MainActivity extends AppCompatActivity
                     cThreadChronometer.start();
                     cChronometer.start();
 
+                    maTimeDifference.setVisibility(View.GONE);
+                    maChronometer.setVisibility(View.VISIBLE);
+
                     maStartButton.setVisibility(View.GONE);
                     maStopButton.setVisibility(View.VISIBLE);
 
@@ -84,7 +111,7 @@ public class MainActivity extends AppCompatActivity
                         {
                             maChronometer.setVisibility(View.INVISIBLE);
                         }
-                    },3000);
+                    },1000);
 
                     if(millisecond <= 9 && second <= 9)
                     {
@@ -143,61 +170,173 @@ public class MainActivity extends AppCompatActivity
                     stringMaChronometer = stringMaChronometer.replaceAll(":","");
                     intMaChronometer    = Integer.parseInt(stringMaChronometer);
 
+
+
                     System.out.println("Goaltime: " + intMaGoalTime + " / Chronometertime: " + intMaChronometer);
 
-
+                    maTimeDifference.setVisibility(View.VISIBLE);
+                    maChronometer.setVisibility(View.GONE);
 
                     if(intMaChronometer > intMaGoalTime)
                     {
                         intMaTimeDifference = intMaChronometer - intMaGoalTime;
+
+                        if (intMaTimeDifference <= 9)
+                        {
+                            maTimeDifference.setText("+0:00:00" + intMaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference <= 99 && intMaTimeDifference > 9)
+                        {
+                            maTimeDifference.setText("+0:00:0" + intMaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference <= 999 && intMaTimeDifference > 99)
+                        {
+                            maTimeDifference.setText("+0:00:" + intMaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference <= 9999 && intMaTimeDifference > 999)
+                        {
+                            stringMaTimeDifference  = Integer.toString(intMaTimeDifference);
+                            sub1MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(0,1);
+                            sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(1,4);
+
+                            maTimeDifference.setText("+0:0" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference <= 99999 && intMaTimeDifference > 9999)
+                        {
+                            stringMaTimeDifference  = Integer.toString(intMaTimeDifference);
+                            sub1MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(0,2);
+                            sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(2,5);
+
+                            maTimeDifference.setText("+0:" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
+                        }
+
+                        intMaDisplayResult = intMaGoalTime + intMaTimeDifference;
+                        System.out.println("INT Display Number: " + intMaDisplayResult);
+
+                        if (intMaDisplayResult <= 9)
+                        {
+                            maDisplayResult.setText("0:00:00" + intMaDisplayResult);
+                        }
+
+                        else if (intMaDisplayResult <= 99 && intMaDisplayResult > 9)
+                        {
+                            maDisplayResult.setText("0:00:0" + intMaDisplayResult);
+                        }
+
+                        else if (intMaDisplayResult <= 999 && intMaDisplayResult > 99)
+                        {
+                            maDisplayResult.setText("0:00:" + intMaDisplayResult);
+                        }
+
+                        else if (intMaDisplayResult <= 9999 && intMaDisplayResult > 999)
+                        {
+                            stringMaDisplayResult   = Integer.toString(intMaDisplayResult);
+                            sub1MaDisplayResult     = String.valueOf(stringMaDisplayResult).substring(0,1);
+                            sub2MaDisplayResult     = String.valueOf(stringMaDisplayResult).substring(1,4);
+
+                            maDisplayResult.setText("0:0" + sub1MaDisplayResult + ":" + sub2MaDisplayResult);
+                        }
+
+                        else if (intMaDisplayResult <= 99999 && intMaDisplayResult > 9999)
+                        {
+                            stringMaDisplayResult   = Integer.toString(intMaDisplayResult);
+                            sub1MaDisplayResult     = String.valueOf(stringMaDisplayResult).substring(0,2);
+                            sub2MaDisplayResult     = String.valueOf(stringMaDisplayResult).substring(2,5);
+
+                            maDisplayResult.setText("0:" + sub1MaDisplayResult + ":" + sub2MaDisplayResult);
+                        }
                     }
 
                     else if(intMaChronometer < intMaGoalTime)
                     {
                         intMaTimeDifference = intMaGoalTime - intMaChronometer;
+
+                        if (intMaTimeDifference <= 9)
+                        {
+                            maTimeDifference.setText("-0:00:00" + intMaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference <= 99 && intMaTimeDifference > 9)
+                        {
+                            maTimeDifference.setText("-0:00:0" + intMaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference <= 999 && intMaTimeDifference > 99)
+                        {
+                            maTimeDifference.setText("-0:00:" + intMaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference <= 9999 && intMaTimeDifference > 999)
+                        {
+                            stringMaTimeDifference  = Integer.toString(intMaTimeDifference);
+                            sub1MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(0,1);
+                            sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(1,4);
+
+                            maTimeDifference.setText("-0:0" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference <= 99999 && intMaTimeDifference > 9999)
+                        {
+                            stringMaTimeDifference  = Integer.toString(intMaTimeDifference);
+                            sub1MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(0,2);
+                            sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(2,5);
+
+                            maTimeDifference.setText("-0:" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
+                        }
+
+                        intMaDisplayResult = intMaGoalTime - intMaTimeDifference;
+                        System.out.println("INT Display Number: " + intMaDisplayResult);
+
+                        if (intMaDisplayResult <= 9)
+                        {
+                            maDisplayResult.setText("0:00:00" + intMaDisplayResult);
+                        }
+
+                        else if (intMaDisplayResult <= 99 && intMaDisplayResult > 9)
+                        {
+                            maDisplayResult.setText("0:00:0" + intMaDisplayResult);
+                        }
+
+                        else if (intMaDisplayResult <= 999 && intMaDisplayResult > 99)
+                        {
+                            maDisplayResult.setText("0:00:" + intMaDisplayResult);
+                        }
+
+                        else if (intMaDisplayResult <= 9999 && intMaDisplayResult > 999)
+                        {
+                            stringMaDisplayResult   = Integer.toString(intMaDisplayResult);
+                            sub1MaDisplayResult     = String.valueOf(stringMaDisplayResult).substring(0,1);
+                            sub2MaDisplayResult     = String.valueOf(stringMaDisplayResult).substring(1,4);
+
+                            maDisplayResult.setText("0:0" + sub1MaDisplayResult + ":" + sub2MaDisplayResult);
+                        }
+
+                        else if (intMaDisplayResult <= 99999 && intMaDisplayResult > 9999)
+                        {
+                            stringMaDisplayResult   = Integer.toString(intMaDisplayResult);
+                            sub1MaDisplayResult     = String.valueOf(stringMaDisplayResult).substring(0,2);
+                            sub2MaDisplayResult     = String.valueOf(stringMaDisplayResult).substring(2,5);
+
+                            maDisplayResult.setText("0:" + sub1MaDisplayResult + ":" + sub2MaDisplayResult);
+                        }
                     }
 
                     else
                     {
                         intMaTimeDifference = 0;
+
+                        maTimeDifference.setText("0:00:00");
                     }
 
 
 
-                    if (intMaTimeDifference <= 9)
-                    {
-                        maTimeDifference.setText("0:00:00" + intMaTimeDifference);
-                    }
 
-                    else if (intMaTimeDifference <= 99 && intMaTimeDifference > 9)
-                    {
-                        maTimeDifference.setText("0:00:0" + intMaTimeDifference);
-                    }
-
-                    else if (intMaTimeDifference <= 999 && intMaTimeDifference > 99)
-                    {
-                        maTimeDifference.setText("0:00:" + intMaTimeDifference);
-                    }
-
-                    else if (intMaTimeDifference <= 9999 && intMaTimeDifference > 999)
-                    {
-                        stringMaTimeDifference  = Integer.toString(intMaTimeDifference);
-                        sub1MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(0,1);
-                        sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(1,4);
-
-                        maTimeDifference.setText("0:0" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
-                    }
-
-                    else if (intMaTimeDifference <= 99999 && intMaTimeDifference > 9999)
-                    {
-                        stringMaTimeDifference  = Integer.toString(intMaTimeDifference);
-                        sub1MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(0,2);
-                        sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(2,5);
-
-                        maTimeDifference.setText("0:" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
-                    }
                 }
-                maChronometer.setVisibility(View.VISIBLE);
+
             }
         });
     }
