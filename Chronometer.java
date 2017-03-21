@@ -2,10 +2,6 @@ package uk.ac.napier.newchrono;
 
 import android.content.Context;
 
-/**
- * Created by Wallentin on 19/03/2017.
- */
-
 public class Chronometer implements Runnable{
 
 
@@ -46,6 +42,10 @@ public class Chronometer implements Runnable{
 
             ((MainActivity)cContext).updateChronometer(String.format("%01d:%02d:%03d", minutes, seconds, milliseconds));
 
+            if (since > 59999)
+            {
+                cIsRunning = false;
+            }
 
         }
     }

@@ -1,6 +1,7 @@
 package uk.ac.napier.newchrono;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.os.Bundle;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
@@ -37,25 +39,12 @@ public class MainActivity extends AppCompatActivity
 
     int intMaTimeDifference;
 
+    int intMaDisplayResult;
 
+    String stringMaDisplayResult;
 
-
-
-
-
-    int intMaDisplayResult; //5500
-
-    String stringMaDisplayResult; //5500 string
-
-    String sub1MaDisplayResult; // 5
-    String sub2MaDisplayResult; // 000
-
-
-
-
-
-
-
+    String sub1MaDisplayResult;
+    String sub2MaDisplayResult;
 
 
     @Override
@@ -77,12 +66,17 @@ public class MainActivity extends AppCompatActivity
         maStartButton.setVisibility(View.VISIBLE);
         maStopButton.setVisibility(View.GONE);
 
+        final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.tick_tock);
 
         maStartButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+
+                mp.start();
+
+
                 Random random   = new Random();
                 int second      = random.nextInt(60 - 0) + 0;
                 int millisecond = random.nextInt(999 - 0) + 0;
@@ -102,9 +96,9 @@ public class MainActivity extends AppCompatActivity
                     maStartButton.setVisibility(View.GONE);
                     maStopButton.setVisibility(View.VISIBLE);
 
-                    final Handler handler = new Handler();
+                    final Handler handler1 = new Handler();
 
-                    handler.postDelayed(new Runnable()
+                    handler1.postDelayed(new Runnable()
                     {
                         @Override
                         public void run()
@@ -143,6 +137,28 @@ public class MainActivity extends AppCompatActivity
                         maGoalTime.setText(0 + ":" + second + ":" + millisecond);
                     }
                 }
+
+                final Handler handler2 = new Handler();
+
+                handler2.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        cChronometer.stop();
+                        cThreadChronometer.interrupt();
+
+                        cThreadChronometer  = null;
+                        cChronometer        = null;
+
+                        maChronometer.setVisibility(View.GONE);
+
+                        maStartButton.setVisibility(View.VISIBLE);
+                        maStopButton.setVisibility(View.GONE);
+
+                        maDisplayResult.setText("Try Again");
+                    }
+                },61000);
             }
         });
 
@@ -151,6 +167,17 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                mp.stop();
+                try
+                {
+                    mp.prepare();
+                }
+
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+
                 if(cChronometer != null)
                 {
                     cChronometer.stop();
@@ -212,6 +239,15 @@ public class MainActivity extends AppCompatActivity
                             sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(2,5);
 
                             maTimeDifference.setText("+0:" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
+                        }
+
+                        else if (intMaTimeDifference > 99999)
+                        {
+                            stringMaTimeDifference  = Integer.toString(intMaTimeDifference);
+                            sub1MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(1,3);
+                            sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(3,6);
+
+                            maTimeDifference.setText("+1:" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
                         }
 
                         intMaDisplayResult = intMaGoalTime + intMaTimeDifference;
@@ -288,6 +324,15 @@ public class MainActivity extends AppCompatActivity
                             maTimeDifference.setText("-0:" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
                         }
 
+                        else if (intMaTimeDifference > 99999)
+                        {
+                            stringMaTimeDifference  = Integer.toString(intMaTimeDifference);
+                            sub1MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(1,3);
+                            sub2MaTimeDifference    = String.valueOf(stringMaTimeDifference).substring(3,6);
+
+                            maTimeDifference.setText("-1:" + sub1MaTimeDifference + ":" + sub2MaTimeDifference);
+                        }
+
                         intMaDisplayResult = intMaGoalTime - intMaTimeDifference;
                         System.out.println("INT Display Number: " + intMaDisplayResult);
 
@@ -341,6 +386,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+
+
+
 
     public void updateChronometer (final String time)
     {
