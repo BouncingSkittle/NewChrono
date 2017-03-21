@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -45,6 +46,10 @@ public class MainActivity extends AppCompatActivity
 
     String sub1MaDisplayResult;
     String sub2MaDisplayResult;
+
+    final Handler handler2 = new Handler();
+
+    int handlerDelayTime = 61000;
 
 
     @Override
@@ -105,7 +110,7 @@ public class MainActivity extends AppCompatActivity
                         {
                             maChronometer.setVisibility(View.INVISIBLE);
                         }
-                    },500);
+                    },200);
 
                     if(millisecond <= 9 && second <= 9)
                     {
@@ -138,13 +143,15 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
 
-                final Handler handler2 = new Handler();
+
 
                 handler2.postDelayed(new Runnable()
                 {
                     @Override
                     public void run()
                     {
+                        if(cChronometer != null)
+                        {
                         cChronometer.stop();
                         cThreadChronometer.interrupt();
 
@@ -156,9 +163,9 @@ public class MainActivity extends AppCompatActivity
                         maStartButton.setVisibility(View.VISIBLE);
                         maStopButton.setVisibility(View.GONE);
 
-                        maDisplayResult.setText("Try Again");
+                        maDisplayResult.setText("Try Again");}
                     }
-                },61000);
+                },handlerDelayTime);
             }
         });
 
@@ -167,6 +174,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                handler2.removeCallbacks(null);
+
                 mp.stop();
                 try
                 {

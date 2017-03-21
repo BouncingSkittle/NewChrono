@@ -1,5 +1,5 @@
 <resources>
-    <string name = "app_name"       > NewChrono                 </string>
+    <string name = "app_name"       > ChronoKing                 </string>
     <string name = "GoalTime"       > 0:00:000                  </string>
     <string name = "Chronometer"    > 0:00:000                  </string>
     <string name = "TimeDifference" > +0:00:000                 </string>
